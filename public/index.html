@@ -133,9 +133,10 @@
           </li>
         </ul>
 
-        <button type="button" class="btn btn-primary rounded-circle addTask" data-toggle="modal" data-target="#newTaskModal"> 
+        <button type="button" class="btn btn-primary rounded-circle addTask" data-toggle="modal"
+          data-target="#newTaskModal">
           <span class="custom-add">+</span>
-        </button> 
+        </button>
       </div>
 
       <!-- Modal -->
@@ -144,18 +145,90 @@
         <div class="modal-dialog" role="document">
           <div class="modal-content">
             <div class="modal-header">
-              <h5 class="modal-title" id="exampleModalLabel">Insert New Task</h5>
+              <h5 class="modal-title" id="exampleModalLabel">New Task</h5>
               <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
               </button>
             </div>
             <div class="modal-body">
-              ...
+
+              <form id="newTaskForm" class="form-horizontal needs-validation" novalidate>
+                <fieldset>
+
+                  <!-- Description-->
+                  <div class="form-group">
+                    <label class="control-label" for="decriptionInput">Description</label>
+                    <div class="">
+                      <input id="decriptionInput" name="decriptionInput" type="text" placeholder="Short Description"
+                        class="form-control input-md" required="true">
+                      <div class="invalid-feedback">
+                        Please insert a description.
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- Project-->
+                  <div class="form-group">
+                    <label class="control-label" for="projectInputForm">Project</label>
+                    <div class="">
+                      <input id="projectInputForm" name="projectInputForm" type="text" placeholder="Project Name"
+                        class="form-control input-md" required="true">
+                      <div class="invalid-feedback">
+                        Please insert a project.
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- Task settings -->
+                  <div class="form-group">
+                    <label class="control-label" for="checkboxesSettings">Task settings</label>
+                    <div class="">
+                      <div class="custom-control custom-checkbox">
+                        <input type="checkbox" class="custom-control-input" name="checkboxesSettings"
+                          id="checkboxesSettings-0" value="1">
+                        <label for="checkboxesSettings-0" class="custom-control-label">Important</label>
+                      </div>
+                      <div class="custom-control custom-checkbox">
+                        <input type="checkbox" class="custom-control-input" name="checkboxesSettings"
+                          id="checkboxesSettings-1" value="2">
+                        <label for="checkboxesSettings-1" class="custom-control-label">Private</label>
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- Shared -->
+                  <div class="form-group">
+                    <label class="control-label" for="sharedInputForm">Shared With</label>
+                    <div class="">
+                      <input id="sharedInputForm" name="sharedInputForm" type="text" class="form-control input-md">
+
+                    </div>
+                  </div>
+
+                  <div class="form-group">
+                    <label class="control-label" for="sharedInputForm">Deadline</label>
+                    <div class="input-group">
+                      <div class="input-group-prepend">
+                        <div class="input-group-text">
+                          📅
+                        </div>
+                      </div>
+                      <input type="date" id="deadlineInput" name="deadline">
+
+                    </div>
+                  </div>
+
+                </fieldset>
+
+
+
+
             </div>
             <div class="modal-footer">
               <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-              <button type="button" class="btn btn-primary">Insert Task</button>
+              <button type="submit" class="btn btn-primary">Add</button>
             </div>
+            </form>
           </div>
         </div>
       </div>

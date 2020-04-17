@@ -17,6 +17,13 @@ class TaskManager{
                             new Date(this.today.getFullYear(),this.today.getMonth(),this.today.getDate()+2)));
     }
 
+    addTask = (task) => {
+        if(Object.getPrototypeOf(task) === Object.getPrototypeOf(new Task()))
+        {   console.log(task) 
+            this.allTasks.push(task);
+        }
+    }
+
     get allTasks() {
         return [...allTasks];
     }

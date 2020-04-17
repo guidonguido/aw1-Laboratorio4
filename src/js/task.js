@@ -19,6 +19,7 @@ class Task {
 
         this.sharedWith = sharedWith;
         this.sharedList.push(sharedWith);
+        console.log(this)
 
         if (!Number.isNaN(deadline.getTime())) {
             const timeOut = this.deadline.getTime() - new Date().getTime();
