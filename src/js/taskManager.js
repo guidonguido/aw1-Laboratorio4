@@ -3,6 +3,7 @@
 class TaskManager{
     allTasks = [];
     today = null;
+    
 
     constructor()
     {   this.today = new Date();
