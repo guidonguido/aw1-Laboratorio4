@@ -6,24 +6,28 @@ class TaskManager{
     
 
     constructor()
-    {   this.today = new Date();
-        this.allTasks.push(new Task("Descrizione del Task", "Esercizio1A", false, true, 
-                            new Date(this.today.getFullYear(),this.today.getMonth(),this.today.getDate()+1), "Guido"));
+    {   this.allTasks.push(new Task("Descrizione del Task", "Esercizio1A", false, true, 
+                                            moment().add(1, 'days'), "Guido"));
         this.allTasks.push(new Task("Descrizione del Task", "Esercizio1B", true, false, 
-                            new Date(this.today.getFullYear(),this.today.getMonth(),this.today.getDate()+3)));
+                                            moment().add(3, 'days')));
         this.allTasks.push(new Task("Descrizione del Task", "Esercizio1c", false, true, 
-                            new Date(this.today.getFullYear(),this.today.getMonth(),this.today.getDate()), "Petre"));
+                                            moment(), "Petre"));
         this.allTasks.push(new Task("Descrizione del Task", "Esercizio1D", true, true, 
-                            new Date(this.today.getFullYear(),this.today.getMonth(),this.today.getDate()+2)));
+                                            moment().add(2, 'days')));
     }
 
     addTask = (task) => {
         if(Object.getPrototypeOf(task) === Object.getPrototypeOf(new Task()))
-        {   console.log(task) 
-            this.allTasks.push(task);
+        {   this.allTasks.push(task);
         }
     }
 
+    get couplesProjectQuantity() {
+        const count = {};
+        this.allTasks.map(task => task.project).forEach(function(i) { count[i] = (count[i]||0) + 1;});
+        return count;
+    }
+    
     get allTasks() {
         return [...allTasks];
     }
@@ -33,22 +37,16 @@ class TaskManager{
     }
 
     get todayTasks() {
-        const today = new Date();
-        today.setHours(0, 0, 0, 0);
         return this.allTasks.filter(task =>{
-            task.deadline.setHours(0, 0, 0, 0);
-            return task.deadline.getTime() === today.getTime();
+            return task.deadline.valueOf() === moment().startOf("day").valueOf();
         })
     }
 
     get next7Tasks() {
-        const nextWeek = new Date();
-        nextWeek.setHours(0,0,0);
-        nextWeek.setDate(nextWeek.getDate() + 7);
+        const nextWeek = moment().startOf('day').add(7, 'days');
 
         return this.allTasks.filter(task =>{
-            task.deadline.setHours(0, 0, 0, 0);
-            return task.deadline.getTime() <= nextWeek.getTime();
+            return task.deadline.valueOf() <= nextWeek.valueOf();
         })
     }
 

@@ -10,7 +10,8 @@ class Task {
         this.project = project;
         this.important = important;
         this.private = private_t;
-        this.deadline = deadline;
+        this.deadline = moment(deadline);
+        this.deadline.startOf("day");
         this.expired = false;
 
         this.id = Task.uid;
@@ -21,10 +22,10 @@ class Task {
         this.sharedList.push(sharedWith);
         console.log(this)
 
-        if (!Number.isNaN(deadline.getTime())) {
-            const timeOut = this.deadline.getTime() - new Date().getTime();
+        if (!Number.isNaN(this.deadline.valueOf())) {
+            const timeOut = this.deadline.valueOf() - moment().startOf("day");
             setTimeout(() => {
-                console.log("Il task con scadenza " + deadline.toDateString() + "è scaduto");
+                console.log("Il task con scadenza " + this.deadline.format("dddd, MMMM Do YYYY") + "è scaduto");
                 this.expired = true;
             }, timeOut > 2147483647 ? 2147483646 : timeOut);
         }

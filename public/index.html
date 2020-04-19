@@ -20,6 +20,7 @@
   <script defer src="../src/js/moment.js"></script>
   <script defer src="../src/js/task.js"></script>
   <script defer src="../src/js/taskManager.js"></script>
+  <script defer src="../src/js/projectManager.js"></script>
   <script defer src="../src/js/filters.js"></script>
   <script defer src="../src/js/app.js"></script>
   <script defer src="../src/js/main.js"></script>
@@ -95,7 +96,7 @@
             <h6 class="title"><b> Projects </b></h6>
           </header>
           <div class="filter-content">
-            <div class="list-group list-group-flush">
+            <div id="projectList" class="list-group list-group-flush">
               <a href="#" class="list-group-item">Web Applications I <span
                   class="float-right badge badge-light round">142</span> </a>
               <a href="#" class="list-group-item">Personal <span class="float-right badge badge-light round">3</span>
@@ -226,7 +227,7 @@
             </div>
             <div class="modal-footer">
               <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-              <button type="submit" class="btn btn-primary">Add</button>
+              <button type="submit" class="btn btn-primary" >Add</button>
             </div>
             </form>
           </div>

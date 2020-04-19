@@ -19,7 +19,9 @@ class Filter{
 
     constructor( taskManager )
     {   this.taskManager = taskManager;
+        this.currentMainName = "All";
         this.displayedTasks = [...this.taskManager.allTasks];
+        this.currentFilter = this.allFilter;
 
         this.parentUL = document.getElementById("taskList");                      //il tag <ol>
         this.listElement = this.parentUL.firstElementChild.cloneNode(true);            //il primo element <li>
@@ -35,7 +37,7 @@ class Filter{
             this.currentFilter? this.currentFilter.classList.toggle("custom-selected-filter") : null;
             this.currentFilter = this.allFilter;
             this.currentMainName = "All";
-            this.displayedTasks = [...this.taskManager.allTasks];                 // TODO AGGIORNA TUTTI I DISPLAYED TASK
+            this.displayedTasks = [...this.taskManager.allTasks];                
             this.allFilter.classList.add("custom-selected-filter");
             this.changeDisplayedTasks();
             event.stopPropagation();
@@ -97,6 +99,16 @@ class Filter{
         });
     }
 
+    newTaskAdded = () =>
+        {   this.currentFilter? this.currentFilter.classList.toggle("custom-selected-filter") : null;
+            this.currentFilter = this.allFilter;
+            this.currentMainName = "All";
+            this.displayedTasks = [...this.taskManager.allTasks];                
+            this.allFilter.classList.add("custom-selected-filter");
+            this.changeDisplayedTasks();
+
+        }
+
     /*
     * Visualizzo i task fitrati nella finestra principale
     */
@@ -118,7 +130,8 @@ class Filter{
 
             tempElement.getElementsByTagName("input")[0].setAttribute("id", "customCheck"+task.id);
             
-            tempElement.getElementsByClassName("custom-data")[0].innerText = task.deadline.toDateString();
+            tempElement.getElementsByClassName("custom-data")[0].innerText = 
+                task.deadline.format("dddd, MMMM Do YYYY");
 
             if(task.private)
                 tempElement.getElementsByClassName("custom-shared")[0].remove();

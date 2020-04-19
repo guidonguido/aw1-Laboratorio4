@@ -3,11 +3,13 @@
 class App {
   tasks = [];
   taskManager = null;
+  projectManager = null;
   filter = null;
 
   constructor() {
     this.taskManager = new TaskManager();
     this.filter = new Filter(this.taskManager);
+    this.projectManager = new ProjectManager(this.taskManager);
     /*
      * Configurazione del Form new Task
      */
@@ -37,20 +39,25 @@ class App {
 
     //NEW TASK FORM SUBMIT
     const form = document.getElementById("newTaskForm");
-    addEventListener('submit', event => {
-      console.log(event.target.elements[6].valueAsDate)
+    window.addEventListener('submit', event => {
       if (form.checkValidity() === false) {
         event.preventDefault();
         event.stopPropagation();
+        form.classList.add('was-validated');
       }
-      form.classList.add('was-validated');
+      else{
+        this.taskManager.addTask(new Task(event.target.elements[1].value, 
+                                          event.target.elements[2].value,
+                                          event.target.elements[3].checked,
+                                          event.target.elements[4].checked,
+                                          event.target.elements[6].valueAsDate,
+                                          event.target.elements[5].value));
+        this.filter.newTaskAdded();
+        this.projectManager.newTaskAdded();
+        form.reset();
+        event.stopPropagation();
+      }  
 
-      this.taskManager.addTask(new Task(event.target.elements[1].value, 
-                                        event.target.elements[2].value,
-                                        event.target.elements[3].checked,
-                                        event.target.elements[4].checked,
-                                        event.target.elements[6].valueAsDate,
-                                        event.target.elements[5].value))
     }, false);
   }
 
